@@ -62,4 +62,4 @@ New features in my version include:
 
 ## License
 
-This package is released under the MIT [License](https://github.com/rodaine/numwords/blob/master/LICENSE).
+This package is released under the MIT [License](https://github.com/dharmab/numwords/blob/master/LICENSE).

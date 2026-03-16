@@ -6,25 +6,21 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDictionary_IncludeSecond(t *testing.T) {
-	t.Parallel()
-
-	_, ok := dictionary.m["second"]
+func TestDictionary_IncludeSecond(t *testing.T) { //nolint:paralleltest // mutates global dictionary
+	_, ok := lookupNumber("second")
 	assert.True(t, ok)
 
 	IncludeSecond(false)
-	_, ok = dictionary.m["second"]
+	_, ok = lookupNumber("second")
 	assert.False(t, ok)
 
 	IncludeSecond(true)
-	n, ok := dictionary.m["second"]
+	n, ok := lookupNumber("second")
 	assert.True(t, ok)
 	assert.Equal(t, second, n)
 }
 
-func TestDictionary_IncludeIndefiniteArticle(t *testing.T) {
-	t.Parallel()
-
+func TestDictionary_IncludeIndefiniteArticle(t *testing.T) { //nolint:paralleltest // mutates global dictionary
 	// Indefinite articles present by default
 	for _, word := range []string{"a", "an"} {
 		_, ok := lookupNumber(word)
@@ -64,9 +60,7 @@ func TestDictionary_IncludeIndefiniteArticle(t *testing.T) {
 	IncludeIndefiniteArticle(true)
 }
 
-func TestDictionary_IncludeFractions(t *testing.T) {
-	t.Parallel()
-
+func TestDictionary_IncludeFractions(t *testing.T) { //nolint:paralleltest // mutates global dictionary
 	// Fractions present by default
 	for _, word := range []string{"half", "thirds", "quarter"} {
 		_, ok := lookupNumber(word)
