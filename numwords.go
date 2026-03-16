@@ -2,7 +2,7 @@
 // actual numeric values. The converted numbers can be parsed out as strings,
 // integers, or floats as desired.
 //
-// Source: https://github.com/rodaine/numwords
+// Source: https://github.com/dharmab/numwords
 package numwords
 
 import "strings"

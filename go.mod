@@ -1,4 +1,4 @@
-module github.com/rodaine/numwords
+module github.com/dharmab/numwords
 
 go 1.26.0
 
