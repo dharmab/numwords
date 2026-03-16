@@ -1,6 +1,7 @@
 package numwords
 
 import (
+	"maps"
 	"strings"
 	"sync"
 )
@@ -147,12 +148,8 @@ var dictionary = struct {
 }
 
 func init() {
-	for k, v := range indefiniteArticles {
-		dictionary.m[k] = v
-	}
-	for k, v := range fractions {
-		dictionary.m[k] = v
-	}
+	maps.Copy(dictionary.m, indefiniteArticles)
+	maps.Copy(dictionary.m, fractions)
 }
 
 // IncludeFractions toggles whether or not fraction words should be included in
@@ -162,9 +159,7 @@ func IncludeFractions(include bool) {
 	dictionary.Lock()
 	defer dictionary.Unlock()
 	if include {
-		for k, v := range fractions {
-			dictionary.m[k] = v
-		}
+		maps.Copy(dictionary.m, fractions)
 	} else {
 		for k := range fractions {
 			delete(dictionary.m, k)
@@ -180,9 +175,7 @@ func IncludeIndefiniteArticle(include bool) {
 	dictionary.Lock()
 	defer dictionary.Unlock()
 	if include {
-		for k, v := range indefiniteArticles {
-			dictionary.m[k] = v
-		}
+		maps.Copy(dictionary.m, indefiniteArticles)
 	} else {
 		for k := range indefiniteArticles {
 			delete(dictionary.m, k)

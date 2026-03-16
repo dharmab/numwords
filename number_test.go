@@ -21,7 +21,7 @@ func TestNumber_Value(t *testing.T) {
 
 	for _, test := range tests {
 		n := number{numerator: test.n, denominator: test.d}
-		assert.Equal(t, test.expected, n.Value(), "%+v", test)
+		assert.InDelta(t, test.expected, n.Value(), 1e-9, "%+v", test)
 	}
 }
 
@@ -93,7 +93,7 @@ func TestNumber_MaybeNumeric(t *testing.T) {
 	for _, test := range tests {
 		n, ok := maybeNumeric(test.in)
 		if assert.Equal(t, test.ok, ok) && ok {
-			assert.Equal(t, test.val, n.Value())
+			assert.InDelta(t, test.val, n.Value(), 1e-9)
 			assert.Equal(t, test.typ, n.typ)
 		}
 	}

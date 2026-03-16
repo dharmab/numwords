@@ -22,11 +22,12 @@ var (
 type numbers []number
 
 // Pattern returns the string that represents the types of numbers in it
-func (ns numbers) pattern() (p string) {
+func (ns numbers) pattern() string {
+	var b strings.Builder
 	for _, n := range ns {
-		p += n.typ.String()
+		b.WriteString(n.typ.String())
 	}
-	return
+	return b.String()
 }
 
 // Strings gets the string representations of each contained number

@@ -26,7 +26,7 @@ func TestNumWords_ParseFloat(t *testing.T) {
 	for _, test := range tests {
 		f, err := ParseFloat(test.in)
 		if assert.NoError(t, err) {
-			assert.Equal(t, test.out, f, test.in)
+			assert.InDelta(t, test.out, f, 1e-9, test.in)
 		}
 	}
 }
@@ -73,7 +73,7 @@ func TestNumWords_ParseString(t *testing.T) {
 		{"two three", "2 3"},
 		{"fifteen three", "15 3"},
 		{"seven eighteen", "7 18"},
-		{"one eighteen seven thirteen three three", "1 18 7 13 3 3"},
+		{"one eighteen seven thirteen three three", "1 18 7 13 3 3"}, //nolint:dupword // intentional test data
 		{"twenty", "20"},
 		{"twenty five", "25"},
 		{"twenty zero", "20 0"},

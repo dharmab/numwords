@@ -6,8 +6,8 @@ import (
 )
 
 func explode(s string) (out []string) {
-	s = strings.Replace(s, "-", " ", -1)
-	s = strings.Replace(s, ",", "", -1)
+	s = strings.ReplaceAll(s, "-", " ")
+	s = strings.ReplaceAll(s, ",", "")
 
 	r := strings.NewReader(s)
 	scanner := bufio.NewScanner(r)

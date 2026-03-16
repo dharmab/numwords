@@ -20,6 +20,6 @@ func TestExploder_Explode(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		assert.EqualValues(t, test.expected, explode(test.in), "%+v", test)
+		assert.Equal(t, test.expected, explode(test.in), "%+v", test)
 	}
 }

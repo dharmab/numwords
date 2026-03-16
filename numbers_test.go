@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestNumbers_Pattern(t *testing.T) {
@@ -36,7 +37,7 @@ func TestNumbers_Strings(t *testing.T) {
 		number{numerator: 1, denominator: 2, typ: numFraction},
 	}
 
-	assert.EqualValues(t, []string{"1000", "2nd", "0.5"}, ns.strings())
+	assert.Equal(t, []string{"1000", "2nd", "0.5"}, ns.strings())
 }
 
 func TestNumbers_String(t *testing.T) {
@@ -48,7 +49,7 @@ func TestNumbers_String(t *testing.T) {
 		number{numerator: 1, denominator: 2, typ: numFraction},
 	}
 
-	assert.EqualValues(t, "1000 2nd 0.5", ns.String())
+	assert.Equal(t, "1000 2nd 0.5", ns.String())
 }
 
 func TestNumbers_Reduce(t *testing.T) {
@@ -62,7 +63,7 @@ func TestNumbers_Reduce(t *testing.T) {
 
 	out := reduce(ns)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(1200), out[0].Value())
+	assert.InDelta(t, float64(1200), out[0].Value(), 1e-9)
 	assert.Equal(t, numBig, out[0].typ)
 }
 
@@ -74,8 +75,8 @@ func TestNumbers_Float(t *testing.T) {
 	}
 
 	out, err := ns.Float()
-	assert.NoError(t, err)
-	assert.Equal(t, float64(1.5), out)
+	require.NoError(t, err)
+	assert.InDelta(t, float64(1.5), out, 1e-9)
 
 	ns = append(ns, number{})
 
@@ -95,7 +96,7 @@ func TestNumbers_Int(t *testing.T) {
 	}
 
 	out, err := ns.Int()
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Equal(t, 1, out)
 
 	ns = append(ns, number{})

@@ -44,7 +44,7 @@ func (n number) String() string {
 }
 
 func maybeNumeric(s string) (n number, ok bool) {
-	s = strings.Replace(s, ",", "", -1)
+	s = strings.ReplaceAll(s, ",", "")
 
 	ord := false
 	for _, suffix := range ordinals {

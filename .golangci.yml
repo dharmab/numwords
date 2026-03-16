@@ -1,0 +1,63 @@
+version: "2"
+
+linters:
+  enable:
+    - asasalint
+    - asciicheck
+    - bidichk
+    - copyloopvar
+    - dupword
+    - durationcheck
+    - errchkjson
+    - errorlint
+    - exhaustive
+    - fatcontext
+    - gocheckcompilerdirectives
+    - gochecksumtype
+    - goconst
+    - goprintffuncname
+    - gosec
+    - gosmopolitan
+    - intrange
+    - makezero
+    - mirror
+    - nilerr
+    - nilnesserr
+    - nolintlint
+    - paralleltest
+    - perfsprint
+    - prealloc
+    - predeclared
+    - reassign
+    - recvcheck
+    - testableexamples
+    - testifylint
+    - thelper
+    - tparallel
+    - unconvert
+    - usestdlibvars
+    - usetesting
+    - wastedassign
+    - whitespace
+  disable:
+    # exhaustruct requires all struct fields to be explicitly initialized.
+    # This conflicts with idiomatic Go which relies on zero values.
+    - exhaustruct
+    # testpackage requires tests to be in separate _test packages (black-box testing).
+    # We use white-box testing to allow tests to access unexported functions.
+    - testpackage
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+
+issues:
+  max-same-issues: 0
+
+formatters:
+  enable:
+    - gofmt
+    - goimports

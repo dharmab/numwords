@@ -32,6 +32,7 @@ New features in my version include:
 
 - `IncludeIndefiniteArticle(bool)` — toggle parsing of indefinite articles ("a", "an") as `1`
 - `IncludeFractions(bool)` — toggle parsing of fraction words ("half", "thirds", "quarter", etc.)
+- Modernized to Go 1.26 with golangci-lint, a Makefile, and updated GitHub Actions CI
 
 ## Some Valid Conversions
 

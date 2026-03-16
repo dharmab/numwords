@@ -13,8 +13,8 @@ func ParseFloat(s string) (float64, error) {
 	in := explode(s)
 	buf := numbers{}
 
-	ok := false
 	for i := range in {
+		var ok bool
 		if buf, ok = readIntoBuffer(i, in, buf); !ok {
 			return -1, ErrNonNumber
 		}
@@ -30,8 +30,8 @@ func ParseInt(s string) (int, error) {
 	in := explode(s)
 	buf := numbers{}
 
-	ok := false
 	for i := range in {
+		var ok bool
 		if buf, ok = readIntoBuffer(i, in, buf); !ok {
 			return -1, ErrNonNumber
 		}
@@ -56,8 +56,8 @@ func ParseStrings(in []string) []string {
 	out := make([]string, 0, 1)
 	buf := numbers{}
 
-	ok := false
 	for i, s := range in {
+		var ok bool
 		if buf, ok = readIntoBuffer(i, in, buf); !ok {
 			out = buf.flush(out)
 			buf = buf[:0]

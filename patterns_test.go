@@ -15,7 +15,7 @@ func TestPatterns_Done(t *testing.T) {
 
 	out := done(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(20), out[0].Value())
+	assert.InDelta(t, float64(20), out[0].Value(), 1e-9)
 	assert.Equal(t, numDone, out[0].typ)
 }
 
@@ -42,7 +42,7 @@ func TestPatterns_Add(t *testing.T) {
 
 	out := add(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(23), out[0].Value())
+	assert.InDelta(t, float64(23), out[0].Value(), 1e-9)
 	assert.Equal(t, numTens, out[0].typ)
 
 	ns = numbers{
@@ -52,7 +52,7 @@ func TestPatterns_Add(t *testing.T) {
 
 	out = add(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(100.5), out[0].Value())
+	assert.InDelta(t, float64(100.5), out[0].Value(), 1e-9)
 	assert.Equal(t, numFraction, out[0].typ)
 }
 
@@ -66,7 +66,7 @@ func TestPatterns_Multiply(t *testing.T) {
 
 	out := multiply(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(300), out[0].Value())
+	assert.InDelta(t, float64(300), out[0].Value(), 1e-9)
 	assert.Equal(t, numBig, out[0].typ)
 
 	ns = numbers{
@@ -76,7 +76,7 @@ func TestPatterns_Multiply(t *testing.T) {
 
 	out = multiply(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(25), out[0].Value())
+	assert.InDelta(t, float64(25), out[0].Value(), 1e-9)
 	assert.Equal(t, numFraction, out[0].typ)
 }
 
@@ -90,7 +90,7 @@ func TestPatterns_Combine(t *testing.T) {
 
 	out := combine(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(300), out[0].Value())
+	assert.InDelta(t, float64(300), out[0].Value(), 1e-9)
 	assert.Equal(t, numBig, out[0].typ)
 
 	ns = numbers{
@@ -100,7 +100,7 @@ func TestPatterns_Combine(t *testing.T) {
 
 	out = combine(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(103), out[0].Value())
+	assert.InDelta(t, float64(103), out[0].Value(), 1e-9)
 	assert.Equal(t, numBig, out[0].typ)
 }
 
@@ -115,9 +115,9 @@ func TestPatterns_CombineToLowest(t *testing.T) {
 
 	out := combineToLowest(ns, 0)
 	assert.Len(t, out, 2)
-	assert.Equal(t, float64(300), out[1].Value())
+	assert.InDelta(t, float64(300), out[1].Value(), 1e-9)
 	assert.Equal(t, numBig, out[1].typ)
-	assert.Equal(t, float64(1000), out[0].Value())
+	assert.InDelta(t, float64(1000), out[0].Value(), 1e-9)
 
 	ns = numbers{
 		number{numerator: 100, denominator: 1, typ: numBig},
@@ -127,9 +127,9 @@ func TestPatterns_CombineToLowest(t *testing.T) {
 
 	out = combineToLowest(ns, 0)
 	assert.Len(t, out, 2)
-	assert.Equal(t, float64(103), out[0].Value())
+	assert.InDelta(t, float64(103), out[0].Value(), 1e-9)
 	assert.Equal(t, numBig, out[0].typ)
-	assert.Equal(t, float64(1000), out[1].Value())
+	assert.InDelta(t, float64(1000), out[1].Value(), 1e-9)
 }
 
 func TestPatterns_YearOrDone(t *testing.T) {
@@ -142,7 +142,7 @@ func TestPatterns_YearOrDone(t *testing.T) {
 
 	out := yearOrDone(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(1988), out[0].Value())
+	assert.InDelta(t, float64(1988), out[0].Value(), 1e-9)
 	assert.Equal(t, numDone, out[0].typ)
 
 	ns = numbers{
@@ -152,7 +152,7 @@ func TestPatterns_YearOrDone(t *testing.T) {
 
 	out = yearOrDone(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(2015), out[0].Value())
+	assert.InDelta(t, float64(2015), out[0].Value(), 1e-9)
 	assert.Equal(t, numDone, out[0].typ)
 
 	ns = numbers{
@@ -175,7 +175,7 @@ func TestPatterns_FractionOrDone(t *testing.T) {
 
 	out := fractionOrDone(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(0.25), out[0].Value())
+	assert.InDelta(t, float64(0.25), out[0].Value(), 1e-9)
 	assert.Equal(t, numFraction, out[0].typ)
 	assert.False(t, out[0].ordinal)
 
@@ -186,9 +186,9 @@ func TestPatterns_FractionOrDone(t *testing.T) {
 
 	out = fractionOrDone(ns, 0)
 	assert.Len(t, out, 2)
-	assert.Equal(t, float64(2), out[0].Value())
+	assert.InDelta(t, float64(2), out[0].Value(), 1e-9)
 	assert.Equal(t, numDone, out[0].typ)
-	assert.Equal(t, float64(4), out[1].Value())
+	assert.InDelta(t, float64(4), out[1].Value(), 1e-9)
 	assert.Equal(t, numSingleOrdinal, out[1].typ)
 	assert.True(t, out[1].ordinal)
 }
@@ -203,7 +203,7 @@ func TestPatterns_FractionOrCombine(t *testing.T) {
 
 	out := fractionOrCombine(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(0.25), out[0].Value())
+	assert.InDelta(t, float64(0.25), out[0].Value(), 1e-9)
 	assert.Equal(t, numFraction, out[0].typ)
 	assert.False(t, out[0].ordinal)
 
@@ -214,7 +214,7 @@ func TestPatterns_FractionOrCombine(t *testing.T) {
 
 	out = fractionOrCombine(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(24), out[0].Value())
+	assert.InDelta(t, float64(24), out[0].Value(), 1e-9)
 	assert.Equal(t, numSingleOrdinal, out[0].typ)
 	assert.True(t, out[0].ordinal)
 }
@@ -230,7 +230,7 @@ func TestPatterns_AddAnd(t *testing.T) {
 
 	out := addAnd(ns, 0)
 	assert.Len(t, out, 1)
-	assert.Equal(t, float64(2.5), out[0].Value())
+	assert.InDelta(t, float64(2.5), out[0].Value(), 1e-9)
 	assert.Equal(t, numFraction, out[0].typ)
 }
 

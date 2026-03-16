@@ -9,17 +9,17 @@ import (
 func TestDictionary_IncludeSecond(t *testing.T) {
 	t.Parallel()
 
-	n, ok := dictionary.m["second"]
+	_, ok := dictionary.m["second"]
 	assert.True(t, ok)
 
 	IncludeSecond(false)
-	n, ok = dictionary.m["second"]
+	_, ok = dictionary.m["second"]
 	assert.False(t, ok)
 
 	IncludeSecond(true)
-	n, ok = dictionary.m["second"]
+	n, ok := dictionary.m["second"]
 	assert.True(t, ok)
-	assert.EqualValues(t, second, n)
+	assert.Equal(t, second, n)
 }
 
 func TestDictionary_IncludeIndefiniteArticle(t *testing.T) {
@@ -47,7 +47,7 @@ func TestDictionary_IncludeIndefiniteArticle(t *testing.T) {
 	for _, word := range []string{"a", "an"} {
 		n, ok := lookupNumber(word)
 		assert.True(t, ok)
-		assert.EqualValues(t, indefiniteArticles[word], n)
+		assert.Equal(t, indefiniteArticles[word], n)
 	}
 
 	// Idempotency
@@ -90,11 +90,11 @@ func TestDictionary_IncludeFractions(t *testing.T) {
 	IncludeFractions(true)
 	n, ok := lookupNumber("half")
 	assert.True(t, ok)
-	assert.EqualValues(t, fractions["half"], n)
+	assert.Equal(t, fractions["half"], n)
 
 	n, ok = lookupNumber("thirds")
 	assert.True(t, ok)
-	assert.EqualValues(t, fractions["thirds"], n)
+	assert.Equal(t, fractions["thirds"], n)
 
 	// Idempotency
 	IncludeFractions(true)
