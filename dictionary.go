@@ -5,7 +5,50 @@ import (
 	"sync"
 )
 
+var indefiniteArticles = map[string]number{
+	"a":  {1, 1, numDirect, false},
+	"an": {1, 1, numDirect, false},
+}
 var second = number{2, 1, numSingleOrdinal, true}
+
+var fractions = map[string]number{
+	"half":         {1, 2, numFraction, false},
+	"halve":        {1, 2, numFraction, false},
+	"halfs":        {1, 2, numFraction, false},
+	"halves":       {1, 2, numFraction, false},
+	"thirds":       {1, 3, numFraction, false},
+	"fourths":      {1, 4, numFraction, false},
+	"quarter":      {1, 4, numFraction, false},
+	"quarters":     {1, 4, numFraction, false},
+	"fifths":       {1, 5, numFraction, false},
+	"sixths":       {1, 6, numFraction, false},
+	"sevenths":     {1, 7, numFraction, false},
+	"eighths":      {1, 8, numFraction, false},
+	"nineths":      {1, 9, numFraction, false},
+	"tenths":       {1, 10, numFraction, false},
+	"elevenths":    {1, 11, numFraction, false},
+	"twelfths":     {1, 12, numFraction, false},
+	"thirteenths":  {1, 13, numFraction, false},
+	"fourteenths":  {1, 14, numFraction, false},
+	"fifteenths":   {1, 15, numFraction, false},
+	"sixteenths":   {1, 16, numFraction, false},
+	"seventeenths": {1, 17, numFraction, false},
+	"eighteenths":  {1, 18, numFraction, false},
+	"nineteenths":  {1, 19, numFraction, false},
+	"twentieths":   {1, 20, numFraction, false},
+	"thirtieths":   {1, 30, numFraction, false},
+	"fourtieths":   {1, 40, numFraction, false},
+	"fiftieths":    {1, 50, numFraction, false},
+	"sixtieths":    {1, 60, numFraction, false},
+	"seventieths":  {1, 70, numFraction, false},
+	"eightieths":   {1, 80, numFraction, false},
+	"ninetieths":   {1, 90, numFraction, false},
+	"hundredths":   {1, 100, numFraction, false},
+	"thousandths":  {1, 1000, numFraction, false},
+	"millionths":   {1, 1000000, numFraction, false},
+	"billionths":   {1, 1000000000, numFraction, false},
+	"trillionths":  {1, 1000000000000, numFraction, false},
+}
 
 var dictionary = struct {
 	sync.RWMutex
@@ -14,7 +57,6 @@ var dictionary = struct {
 	m: map[string]number{
 		// Direct
 		"zero":      {0, 1, numDirect, false},
-		"a":         {1, 1, numDirect, false},
 		"ten":       {10, 1, numDirect, false},
 		"eleven":    {11, 1, numDirect, false},
 		"twelve":    {12, 1, numDirect, false},
@@ -56,44 +98,6 @@ var dictionary = struct {
 		"million":  {1000000, 1, numBig, false},
 		"billion":  {1000000000, 1, numBig, false},
 		"trillion": {1000000000000, 1, numBig, false},
-
-		// Fractions
-		"half":         {1, 2, numFraction, false},
-		"halve":        {1, 2, numFraction, false},
-		"halfs":        {1, 2, numFraction, false},
-		"halves":       {1, 2, numFraction, false},
-		"thirds":       {1, 3, numFraction, false},
-		"fourths":      {1, 4, numFraction, false},
-		"quarter":      {1, 4, numFraction, false},
-		"quarters":     {1, 4, numFraction, false},
-		"fifths":       {1, 5, numFraction, false},
-		"sixths":       {1, 6, numFraction, false},
-		"sevenths":     {1, 7, numFraction, false},
-		"eighths":      {1, 8, numFraction, false},
-		"nineths":      {1, 9, numFraction, false},
-		"tenths":       {1, 10, numFraction, false},
-		"elevenths":    {1, 11, numFraction, false},
-		"twelfths":     {1, 12, numFraction, false},
-		"thirteenths":  {1, 13, numFraction, false},
-		"fourteenths":  {1, 14, numFraction, false},
-		"fifteenths":   {1, 15, numFraction, false},
-		"sixteenths":   {1, 16, numFraction, false},
-		"seventeenths": {1, 17, numFraction, false},
-		"eighteenths":  {1, 18, numFraction, false},
-		"nineteenths":  {1, 19, numFraction, false},
-		"twentieths":   {1, 20, numFraction, false},
-		"thirtieths":   {1, 30, numFraction, false},
-		"fourtieths":   {1, 40, numFraction, false},
-		"fiftieths":    {1, 50, numFraction, false},
-		"sixtieths":    {1, 60, numFraction, false},
-		"seventieths":  {1, 70, numFraction, false},
-		"eightieths":   {1, 80, numFraction, false},
-		"ninetieths":   {1, 90, numFraction, false},
-		"hundredths":   {1, 100, numFraction, false},
-		"thousandths":  {1, 1000, numFraction, false},
-		"millionths":   {1, 1000000, numFraction, false},
-		"billionths":   {1, 1000000000, numFraction, false},
-		"trillionths":  {1, 1000000000000, numFraction, false},
 
 		// Direct Ordinals
 		"zeroth":      {0, 1, numDirectOrdinal, true},
@@ -140,6 +144,50 @@ var dictionary = struct {
 		"and": {0, 0, numAnd, false},
 		"&":   {0, 0, numAnd, false},
 	},
+}
+
+func init() {
+	for k, v := range indefiniteArticles {
+		dictionary.m[k] = v
+	}
+	for k, v := range fractions {
+		dictionary.m[k] = v
+	}
+}
+
+// IncludeFractions toggles whether or not fraction words should be included in
+// the interpreted words. If true, words like "half", "thirds", "quarter", etc.
+// will be parsed as fractions. The default is set to true.
+func IncludeFractions(include bool) {
+	dictionary.Lock()
+	defer dictionary.Unlock()
+	if include {
+		for k, v := range fractions {
+			dictionary.m[k] = v
+		}
+	} else {
+		for k := range fractions {
+			delete(dictionary.m, k)
+		}
+	}
+}
+
+// IncludeIndefiniteArticle toggles whether or not indefinite articles ("a",
+// "an") should be included in the interpreted words. If true, "a" and "an"
+// will be read as "1" (e.g. "a hundred" becomes 100), otherwise the words
+// will be ignored. The default is set to true.
+func IncludeIndefiniteArticle(include bool) {
+	dictionary.Lock()
+	defer dictionary.Unlock()
+	if include {
+		for k, v := range indefiniteArticles {
+			dictionary.m[k] = v
+		}
+	} else {
+		for k := range indefiniteArticles {
+			delete(dictionary.m, k)
+		}
+	}
 }
 
 // IncludeSecond toggles whether or not "second" should be included in the

@@ -1,6 +1,6 @@
-# numwords <br/> [![Build Status](https://travis-ci.org/rodaine/numwords.svg)](https://travis-ci.org/rodaine/numwords) [![GoDoc](https://godoc.org/github.com/rodaine/numwords?status.svg)](https://godoc.org/github.com/rodaine/numwords)
+# numwords <br/>
 
-**numwords** is a utility package for Go (golang) that converts natural language numbers
+**numwords** is a package for Go that converts natural language numbers
 to their actual numeric values. The numbers can be parsed out as strings,
 integers, or floats as desired.
 
@@ -26,7 +26,12 @@ func Example() {
 }
 ```
 
-This package is largely inspired by the excellent [Numerizer Ruby gem](https://github.com/jduff/numerizer).
+This package is a fork of [Chris Roche's original](https://github.com/rodaine/numwords), which was inspired by the [Numerizer Ruby gem](https://github.com/jduff/numerizer).
+
+New features in my version include:
+
+- `IncludeIndefiniteArticle(bool)` — toggle parsing of indefinite articles ("a", "an") as `1`
+- `IncludeFractions(bool)` — toggle parsing of fraction words ("half", "thirds", "quarter", etc.)
 
 ## Some Valid Conversions
 
